@@ -18,12 +18,8 @@ echo $utilisateur;
 echo '<br/>';
 echo '<br/>';
 
-$roleAdmin = new Role();
-$roleAdmin->nom = "Administrateur";
-
-$admin = new Admin('admin', 'admin123', 'admin@dawan.fr', $roleAdmin);
+$admin = new Admin('admin', 'admin123', 'admin@dawan.fr', 'Informatique');
 $admin->prenom = "Admin";
 $admin->nom = "Toto";
 
 echo $admin;
-var_dump($admin);
