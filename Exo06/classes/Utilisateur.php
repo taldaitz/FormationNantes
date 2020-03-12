@@ -57,4 +57,18 @@ class Utilisateur {
 
         return $user == false ? null : $user;
     }
+
+    public static function getAll() {
+        $pdo = new PDO('mysql:host=localhost;dbname=blog_php;charset=utf8', 'root', '');
+        
+        $sql = "SELECT * FROM utilisateur";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $users = $stmt->fetchAll();
+
+        return $users;
+    }
 }
