@@ -36,19 +36,25 @@ class Utilisateur {
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        /*
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $id = $result['id'];
-        $login = $result['login'];
-        $password = $result['password'];
-        $email = $result['email'];
-
-        $user = new Utilisateur($login, $password, $email);
-        $user->id = $id;*/
-
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
         $user = $stmt->fetch();
 
         return $user;
+    }
+
+    public static function authenticate(string $login, string $password) : ?Utilisateur {
+        $pdo = new PDO('mysql:host=localhost;dbname=blog_php;charset=utf8', 'root', '');
+        
+        $sql = "SELECT * FROM utilisateur WHERE login = :login AND password = :password";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $user = $stmt->fetch();
+
+        return $user == false ? null : $user;
     }
 }
