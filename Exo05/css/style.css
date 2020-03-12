@@ -1,0 +1,17 @@
+.RecapPerso {
+    display: inline-block;
+    width: 20%;
+    min-height: 200px;
+    text-align: center;
+}
+
+#menuPersoA {
+    background-color: paleturquoise;
+    float: left;
+}
+
+
+#menuPersoB {
+    background-color: palegoldenrod;
+    float: right;
+}
